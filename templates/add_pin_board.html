@@ -1,0 +1,73 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Add Pin Board</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--    <h1>Add Pin Board</h1>-->
+<!--    <form method="post" action="{{ url_for('add_pin_board') }}">-->
+<!--        <label for="pin_board_name">Pin Board Name:</label>-->
+<!--        <input type="text" id="pin_board_name" name="pin_board_name" required>-->
+<!--        <br>-->
+<!--        <button type="submit">Add Pin Board</button>-->
+<!--    </form>-->
+<!--</body>-->
+<!--</html>-->
+{% extends 'layout.html' %}
+{% block content %}
+<div class="container-fluid">
+				<div class="row page-titles">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="javascript:void(0)">Home\PinBoard</a></li>
+					</ol>
+                </div>
+    <div class="row">
+       <div class="col-xl-12">
+            <form method="post"  action="{{ url_for('add_pin_board') }}">
+                <div class="mb-3 row">
+                                                    <label class="col-lg-4 col-form-label" for="current_password">Add pinboard
+                                                    </label>
+                                                    <div class="col-lg-6">
+                                                        <input type="text" name="pin_board_name" class="form-control" id="current_password" placeholder="Input Pinboard name" >
+														<div class="invalid-feedback">
+
+														</div>
+                                                    </div>
+                                                </div>
+                 <div class="mb-3 row">
+
+                                                </div>
+                 <div class="mb-3 row">
+
+                                                </div>
+                <div class="col-lg-8 ms-auto">
+                                                        <button type="submit" class="btn btn-primary">Submit</button>
+
+                                                    </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+<!--    <h2>Change Password</h2>-->
+<!--    {% with messages = get_flashed_messages() %}-->
+<!--        {% if messages %}-->
+<!--            <ul class="messages">-->
+<!--                {% for message in messages %}-->
+<!--                    <li>{{ message }}</li>-->
+<!--                {% endfor %}-->
+<!--            </ul>-->
+<!--        {% endif %}-->
+<!--    {% endwith %}-->
+<!--    <form method="post" action="{{ url_for('change_password') }}">-->
+<!--        <label for="current_password">Current Password:</label>-->
+<!--        <input type="password" name="current_password" required>-->
+<!--        <label for="new_password">New Password:</label>-->
+<!--        <input type="password" name="new_password" required>-->
+<!--        <label for="confirm_password">Confirm New Password:</label>-->
+<!--        <input type="password" name="confirm_new_password" required>-->
+<!--        <button type="submit">Change Password</button>-->
+<!--    </form>-->
+{% endblock %}

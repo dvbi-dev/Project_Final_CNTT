@@ -1,0 +1,93 @@
+{% extends 'admin/layout.html' %}
+{% block content %}
+<div class="container-fluid" id="container-wrapper">
+	<div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Image</h1>
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="./">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page"> Display Image</li>
+            </ol>
+          </div>
+          <div class="row">
+              <div class="col-lg-12">
+              <div class="card mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-primary">DataTable</h6>
+                </div>
+                <div class="table-responsive p-3">
+                  <table class="table align-items-center table-flush" id="dataTable">
+                    <thead class="thead-light">
+                      <tr>
+                          <th>ID</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Image</th>
+                        <th>Link</th>
+                          <th>View</th>
+                          <th>See comment</th>
+                          <th>User</th>
+                          <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tfoot>
+                      <tr>
+                          <th>ID</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Image</th>
+                        <th>Link</th>
+                          <th>View</th>
+                          <th>See comment</th>
+                          <th>User</th>
+                          <th>Action</th>
+                      </tr>
+                    </tfoot>
+                    <tbody>
+                      <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                      </tr>
+                      {% for image in images %}
+				<tr >
+                    <td>{{ loop.index }}</td>
+					<td>{{ image.caption }}</td>
+					<td>{{image.description}}</td>
+                    <td><img width="50px" height="50px" src="{{url_for('static',filename='uploads/'+image.image_path)}}" alt="Avatar"></td>
+                    <td >{{image.link}}</td>
+                    <td>{{image.views}}</td>
+                    <td><a href="{{ url_for('image_comments_admin', image_id=image.id) }}">Comment</a></td>
+                    <td><a href="{{ url_for('user_images_admin', user_id=image.user.id) }}">{{image.user.username}}</a></td>
+                    <td><form action="{{ url_for('admin_delete_image', image_id=image.id) }}" method="post">
+    <input type="submit" value="Delete">
+  </form></td>
+
+
+				</tr>
+  {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+</div>
+	</div>
+
+<!--    {% for image in images %}-->
+<!--        <div>-->
+<!--&lt;!&ndash;            <img src="{{ url_for('static', filename='uploads/' + image.image_path) }}" alt="{{ image.caption }}">&ndash;&gt;-->
+<!--            <a href="{{ url_for('image_comments_admin', image_id=image.id) }}"> <p>{{ image.caption }}</p></a>-->
+<!--            <p>{{image.decription}}</p>-->
+<!--            <p>{{image.link}}</p>-->
+<!--            <p>{{ image.image_path }}</p>-->
+<!--            &lt;!&ndash; Add more details or styling as needed &ndash;&gt;-->
+<!--        </div>-->
+<!--    {% endfor %}-->
+{% endblock %}

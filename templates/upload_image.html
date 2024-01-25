@@ -1,0 +1,161 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+<div class="container-fluid">
+
+
+				<div class="row page-titles">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item active"><a href="javascript:void(0)">App</a></li>
+						<li class="breadcrumb-item"><a href="javascript:void(0)">Upload image</a></li>
+					</ol>
+                </div>
+    <div class="row">
+        <div class="col-xl-12">
+            <script>
+    function readurl(input){
+        if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#preview')
+                .attr('src', e.target.result);
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+    }
+</script>
+
+<div class="container">
+
+    <div class="row">
+        <div class="col">
+            <img src="/static/img/default-img.jpg" id="preview" width="500" height="500">
+        </div>
+        <div class="col">
+            <form method="post" enctype="multipart/form-data">
+            <div class="mb-3 row">
+
+                                                    <label class="col-lg-4 col-form-label" for="validationCustom01">Title
+                                                        <span class="text-danger">*</span>
+                                                    </label>
+                                                    <div class="col-lg-6">
+														<input name="caption" type="text" class="form-control" id="validationCustom01" placeholder="Enter a username.." required="">
+														<div class="invalid-feedback">
+															Please enter a title.
+														</div>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label class="col-lg-4 col-form-label" for="validationCustom02">Description
+                                                    </label>
+                                                    <div class="col-lg-6">
+                                                        <input name="description" type="text" class="form-control" id="validationCustom02" placeholder="Your valid email.." required="">
+														<div class="invalid-feedback">
+															Please enter a decription.
+														</div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="mb-3 row">
+                                                    <label class="col-lg-4 col-form-label" for="validationCustom04">Link
+                                                    </label>
+                                                    <div class="col-lg-6">
+                                                        <textarea name="link" class="form-control" id="validationCustom04" rows="5" placeholder="What would you like to see?" required=""></textarea>
+														<div class="invalid-feedback">
+															Please enter a link.
+														</div>
+                                                    </div>
+                                                </div>
+                <div class="mb-3 row">
+
+                        <label class=" col-lg-4 form-check-label" for="customCheckBox1">Allow comment</label>
+                        <div class="col-lg-6">
+											<input name="allow_comments" type="checkbox" class="form-check-input" id="customCheckBox1" >
+                        </div>
+
+
+                </div>
+            <div class="mb-3 row">
+                                                    <label class="col-lg-4 col-form-label" >Album
+                                                    </label>
+                                                    <div class="col-lg-6">
+                                                        <select name="album_id" class="form-control">
+    <option value="">No Album</option>
+    {% for album in albums %}
+        <option value="{{ album.id }}">{{ album.name }}</option>
+    {% endfor %}
+</select>
+                                                    </div>
+                                                </div>
+             <div class="mb-3 row">
+                                                    <label class="col-lg-4 col-form-label" for="validationCustom04">Upload image
+                                                    </label>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-file">
+                                                <input  name='image' onchange="readurl(this)" type="file" class="form-file-input form-control">
+                                            </div>
+                                                    </div>
+                                                </div>
+                       <div class="mb-3 row">
+                <label class="col-lg-4 col-form-label" for="multi-value-select">Hashtags</label>
+                            <div class="col-lg-6">
+                                                        <div class="form-file">
+                                               <select  name="hashtags" multiple="multiple" id="multi-value-select" class="multi-select" >
+                                    {% for hashtag in all_hashtags %}
+                <option value="{{ hashtag.name }}">{{ hashtag.name }}</option>
+            {% endfor %}
+                                </select>
+                                            </div>
+
+                       </div>
+                       </div>
+            <div class="mb-3 row">
+                                                    <div class="col-lg-8 ms-auto">
+                                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                                    </div>
+                                                </div>
+
+
+
+
+
+
+            </form>
+        </div>
+    </div>
+
+</div>
+</div>
+        </div>
+    </div>
+</div>
+<!--    <form method="post" enctype="multipart/form-data">-->
+<!--        <label for="image">Select Image:</label>-->
+<!--        <input type="file" name="image" accept="image/*" required>-->
+<!--        <br>-->
+<!--        <label for="caption">Caption:</label>-->
+<!--        <textarea name="caption" rows="4" cols="50"></textarea>-->
+<!--        <br>-->
+
+<!--        <select name="album_id">-->
+<!--    <option value="">No Album</option>-->
+<!--    {% for album in albums %}-->
+<!--        <option value="{{ album.id }}">{{ album.name }}</option>-->
+<!--    {% endfor %}-->
+<!--</select>-->
+
+
+
+<!--        <input type="submit" value="Upload">-->
+<!--    </form>-->
+{% endblock %}

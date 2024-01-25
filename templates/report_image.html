@@ -1,0 +1,42 @@
+<!--&lt;!&ndash; report_image.html &ndash;&gt;-->
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    &lt;!&ndash; Add your head content here &ndash;&gt;-->
+<!--</head>-->
+<!--<body>-->
+<!--    <h1>Report Image</h1>-->
+{% extends 'layout.html' %}
+{% block content %}
+<div class="container-fluid">
+
+
+				<div class="row page-titles">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item active"><a href="javascript:void(0)">App</a></li>
+						<li class="breadcrumb-item"><a href="javascript:void(0)">Report</a></li>
+					</ol>
+                </div>
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="card">
+                <div class="card-body">
+                    <form method="POST" action="{{ url_for('report_image', image_id=image_id) }}">
+
+        <div class="mb-3 row">
+            <label class="col-lg-4 col-form-label"for="reason">Reason for reporting</label>
+            <div class="col-lg-6">
+            <textarea class="form-control" id="reason" name="reason" required></textarea>
+                </div>
+        </div>
+        <div>
+            <button class="btn btn-primary" type="submit">Report</button>
+        </div>
+    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

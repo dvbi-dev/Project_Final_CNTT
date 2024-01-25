@@ -1,0 +1,109 @@
+<!--&lt;!&ndash; Trong template HTML của bạn, chẳng hạn là suggested_users.html &ndash;&gt;-->
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Suggested Users</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--    <h1>Suggested Users</h1>-->
+
+
+<!--        <ul>-->
+<!--            {% for user in recommended_items %}-->
+<!--                <li>-->
+
+<!--                    <p>Email: {{ user.username}}</p>-->
+<!--                    <p><a href="{{ url_for('view_profile', user_id=user.id) }}">a</a></p>-->
+
+<!--                </li>-->
+<!--            {% endfor %}-->
+<!--        </ul>-->
+
+
+<!--</body>-->
+<!--</html>-->
+{% extends 'layout.html' %}
+{% block content %}
+<div class="row">
+
+    <div class="col-xl-12">
+						<div class="row">
+                            {% for user in recommended_items %}
+							<div class="col-xl-3 col-xxl-4 col-lg-4 col-md-6 col-sm-6 items">
+								<div class="card contact-bx item-content">
+									<div class="card-header border-0">
+										<div class="action-dropdown">
+											<div class="dropdown ">
+												<div class="btn-link" data-bs-toggle="dropdown">
+													<svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+														<circle cx="12.4999" cy="3.5" r="2.5" fill="#A5A5A5"></circle>
+														<circle cx="12.4999" cy="11.5" r="2.5" fill="#A5A5A5"></circle>
+														<circle cx="12.4999" cy="19.5" r="2.5" fill="#A5A5A5"></circle>
+													</svg>
+												</div>
+												<div class="dropdown-menu dropdown-menu-right">
+													<a class="dropdown-item" href="javascript:void(0)">Delete</a>
+													<a class="dropdown-item" href="javascript:void(0)">Edit</a>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="card-body user-profile">
+										<div class="image-bx">
+											{% if user.avatar %}
+											<img src="{{ url_for('static', filename='uploads/'+user.avatar)  }}"  alt="" class="rounded-circle">
+											{% else%}
+											<img src="{{ url_for('static', filename='uploads/default_avatar.png')  }}" alt="" class="rounded-circle">
+											{% endif %}
+											<span class="active"></span>
+										</div>
+										<div class="media-body user-meta-info">
+											<h6 class="fs-18 font-w600 my-1"><a href="{{ url_for('view_profile', user_id=user.id) }}" class="text-black user-name" data-name="Alan Green">{{ user.username }}</a></h6>
+
+<!--											<ul>-->
+<!--												<li><a href="javascript:void(0);"><i class="fas fa-phone-alt"></i></a></li>-->
+<!--												<li><a href="javascript:void(0);"><i class="far fa-comment-alt"></i></a></li>-->
+<!--												<li><a href="javascript:void(0);"><i class="fas fa-video"></i></a></li>-->
+<!--											</ul>-->
+										</div>
+                                         <div class="profile-email px-2 pt-2">
+                                                   {% if user.is_following(user) %}
+
+            <form method="post" action="{{ url_for('unfollow', user_id=user.id) }}">
+                <input type="submit" class="btn btn-primary mb-1 me-1" value="Unfollow">
+            </form>
+        {% else %}
+            <form method="post" action="{{ url_for('follow', user_id=user.id) }}">
+                <input type="submit"class="btn btn-primary mb-1 me-1" value="Follow">
+            </form>
+        {% endif %}
+
+
+
+												</div>
+									</div>
+								</div>
+							</div>
+                            {% endfor %}
+                        </div>
+    </div>
+</div>
+<!--    <h1>Users</h1>-->
+<!--    <ul>-->
+<!--        {% for user in users %}-->
+<!--    <h3>{{ user.username }}</h3>-->
+<!--    {% if current_user.is_following(user) %}-->
+<!--        <p>Already following</p>-->
+<!--        <a href="{{ url_for('unfollow', user_id=user.id) }}">Unfollow</a>-->
+<!--    {% else %}-->
+<!--        <a href="{{ url_for('follow', user_id=user.id) }}">Follow</a>-->
+<!--    {% endif %}-->
+<!--{% endfor %}-->
+
+<!--    </ul>-->
+{% endblock %}
+

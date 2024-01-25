@@ -1,0 +1,76 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+
+
+<!--<form method="post" action="">-->
+<!--    <input type="text" name="content" placeholder="Type your message">-->
+<!--    <input type="submit" value="Send">-->
+<!--</form>-->
+<div class="container-fluid">
+
+
+				<div class="row page-titles">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item active"><a href="javascript:void(0)">App</a></li>
+						<li class="breadcrumb-item"><a href="javascript:void(0)">Chat with {{ partner.username }}</a></li>
+					</ol>
+                </div>
+<div class="row">
+<div class="chat-box-area dlab-scroll chat-box-area" id="chatArea">
+											<div class="chat-box-area dz-scroll" id="chartBox">
+                                                {% for message in messages %}
+    {% if message.sender == current_user %}
+                                                   <div class="media mb-4 justify-content-end align-items-end">
+													<div class="message-sent">
+														<p class="mb-1">
+															{{ message.content }}
+														</p>
+														<span class="fs-12">{{ message.timestamp }}</span>
+													</div>
+													<div class="image-box ms-sm-4 ms-2 mb-4">
+														{% if session.avatar %}
+														<img src="{{ url_for('static',filename='uploads/'+session.avatar) }}" alt="" class="rounded-circle img-1">
+														{% else %}
+														<img src="{{ url_for('static',filename='uploads/default_avatar.png') }}" alt="" class="rounded-circle img-1">
+														{% endif %}
+													</div>
+												</div>
+                                                {% else %}
+<div class="media my-4  justify-content-start align-items-start">
+													<div class="image-box me-sm-4 me-2">
+														{% if partner.avatar %}
+														<img src="{{ url_for('static',filename='uploads/'+partner.avatar) }}" alt="" class="rounded-circle img-1">
+														{% else %}
+														<img src="{{ url_for('static',filename='uploads/default_avatar.png') }}" alt="" class="rounded-circle img-1">
+														{% endif %}
+													</div>
+													<div class="message-received">
+														<p class="mb-1">
+															 {{ message.content }}
+														</p>
+														<span class="fs-12">{{ message.timestamp }}</span>
+													</div>
+												</div>
+                                          {% endif %}
+{% endfor %}
+
+ </div>
+</div>
+										<div class="card-footer border-0 type-massage">
+											<form method="post" action="">
+											<div class="input-group">
+												<textarea name="content"class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="input text"></textarea>
+											</div>
+											<div class="input-group-append d-flex justify-content-between flex-wrap">
+
+												<div>
+
+													<button type="submit" class="btn btn-primary rounded text-white"><i class="far fa-paper-plane me-2"></i>SEND</button>
+												</div>
+											</div>
+											</form>
+										</div>
+</div>
+</div>
+{% endblock %}

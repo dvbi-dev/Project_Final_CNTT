@@ -1,0 +1,27 @@
+<!-- view_history.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View History</title>
+</head>
+<body>
+    <h1>View History</h1>
+
+    {% if latest_image %}
+        <div>
+            <img src="{{ url_for('static', filename='uploads/' + latest_image.image_path) }}" alt="Latest Image">
+            <p>Caption: {{ latest_image.caption }}</p>
+            <p>{{latest_image.image_path}}</p>
+            <p>Timestamp: {{ latest_image.timestamp }}</p>
+
+        </div>
+    {% else %}
+        <p>No view history available.</p>
+    {% endif %}
+
+    <a href="{{ url_for('home') }}">Back to Home</a>
+</body>
+</html>

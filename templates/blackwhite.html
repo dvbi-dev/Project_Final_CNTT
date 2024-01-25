@@ -1,0 +1,65 @@
+{% extends 'layout.html' %}
+{% block content %}
+      <script defer src="https://cdn.jsdelivr.net/npm/img-comparison-slider@8/dist/index.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/img-comparison-slider@8/dist/styles.css">
+<div class="row">
+	<div class="col-xl-12 col-lg-12">
+        <div class="card-body">
+             <div class="basic-form custom_file_input">
+                                    <form id="upload-form"  method= "POST" enctype="multipart/form-data">
+
+
+                                        <div class="input-group mb-3">
+                                            <div class="form-file">
+                                                <input type="file" name="InputImg" accept="image/*" class="form-file-input form-control">
+                                            </div>
+											<span class="input-group-text btn btn-primary btn-sm">Upload</span>
+                                        </div>
+
+
+										<center><button  type="submit" class="btn btn-primary">Upload</button></center>
+
+
+
+                                    </form>
+                                </div>
+
+
+           <div class="col-lg-12 col-xl-12">
+            <div class="card" style="width:auto;height:auto">
+    <div class="card-body">
+        <div class="column" >
+        <div class="gallery-item new-arrival-product">
+            <center><div class="new-arrivals-img-contnent" >
+         <img-comparison-slider >
+  <img slot="first"width="100%" src="data:image/jpeg;base64,{{oimg}}" alt="Color" />
+
+  <img slot="second"width="100%" src="data:image/jpeg;base64,{{img}}" alt="B/W" />
+   </img-comparison-slider>
+            </div></center>
+
+
+        </div>
+
+          </div>
+    </div>
+
+</div>
+</div>
+
+
+
+<!--            <img-comparison-slider>-->
+<!--  <img slot="first"width="100%" src="data:image/jpeg;base64,{{oimg}}" alt="Color" />-->
+
+<!--  <img slot="second"width="100%" src="data:image/jpeg;base64,{{img}}" alt="B/W" />-->
+<!--   </img-comparison-slider>-->
+        </div>
+    </div>
+</div>
+
+
+
+
+
+{% endblock %}

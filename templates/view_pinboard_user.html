@@ -1,0 +1,53 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="container-fluid">
+				<div class="row page-titles">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="javascript:void(0)">Images in Pin Board "{{ pin_board.name }}"</a></li>
+					</ol>
+                </div>
+  <div class="row" >
+      {% for pinned_image in images %}
+  <div class="col-lg-12 col-xl-4">
+            <div class="card" style="width:auto;height:auto">
+    <div class="card-body">
+        <div class="column" >
+        <div class="gallery-item new-arrival-product">
+            <div class="new-arrivals-img-contnent" >
+          <img src="{{ url_for('static', filename='uploads/' + pinned_image.image_path) }}" alt="Imagen 1" />
+            </div>
+          <div class="hover-elements">
+            <a href="{{ url_for('view_image', image_id=pinned_image.id) }}"><button class="btn-save btn btn-primary">Image</button></a>
+            <div class="bottom-buttons">
+              <a href="{{pinned_image.link}}"><button class="btn-link"><i class="fa-solid fa-link"></i></button></a>
+<a href="{{ url_for('remove_from_pin_board', pin_board_id=pin_board.id, image_id=pinned_image.id) }}"><button class="btn-link"><i class="fa-solid fa-trash"></i></button></a>
+
+            </div>
+
+          </div>
+
+        </div>
+
+          </div>
+    </div>
+
+</div>
+</div>
+
+  {% endfor %}
+
+
+
+  </div>
+</div>
+{% endblock %}
+
+<!--  {% for pinned_image in images %}-->
+<!--{{ pinned_image.image_path}}-->
+<!--<img class="img-fluid" src="{{ url_for('static', filename='uploads/' + pinned_image.image_path) }}" alt="">-->
+
+<!--<a href="{{ url_for('remove_from_pin_board', pin_board_id=pin_board.id, image_id=pinned_image.id) }}">Remove</a>-->
+
+
+<!--  {% endfor %}-->
+

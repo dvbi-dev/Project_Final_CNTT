@@ -1,0 +1,135 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="container-fluid">
+
+
+				<div class="row page-titles">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item active"><a href="javascript:void(0)">App</a></li>
+						<li class="breadcrumb-item"><a href="javascript:void(0)">Profile</a></li>
+					</ol>
+                </div>
+    <div class="row">
+        <div class="col-xl-12">
+            <form method="post"  action="{{ url_for('update_caption', image_id=image.id) }}">
+            <div class="mb-3 row">
+                                                    <label class="col-lg-4 col-form-label" for="validationCustom01">Title
+                                                    </label>
+                                                    <div class="col-lg-6">
+                                                        <input name="new_caption" type="text" value="{{ image.caption }}" class="form-control" id="validationCustom01" placeholder="Your valid email.." >
+														<div class="invalid-feedback">
+
+														</div>
+                                                    </div>
+                                                </div>
+              <div class="mb-3 row">
+                                                    <label class="col-lg-4 col-form-label" for="validationCustom02">Description
+                                                    </label>
+                                                    <div class="col-lg-6">
+                                                        <input  name="new_description" value="{{ image.description }}" type="text" class="form-control" id="validationCustom02" placeholder="Your valid email.." >
+														<div class="invalid-feedback">
+
+														</div>
+                                                    </div>
+                                                </div>
+            <div class="mb-3 row">
+                                                    <label class="col-lg-4 col-form-label" for="validationCustom03">Link
+                                                    </label>
+                                                    <div class="col-lg-6">
+                                                        <input name="new_link" value="{{ image.link }}"type="text" class="form-control" id="validationCustom03" placeholder="Your valid email.." >
+														<div class="invalid-feedback">
+
+														</div>
+                                                    </div>
+                                                </div>
+<div class="mb-3 row">
+                                                    <label class="col-lg-4 col-form-label" >Album
+                                                    </label>
+                                                    <div class="col-lg-6">
+                                                        <select name="album_id" class="form-control">
+    <option value="">No Album</option>
+    {% for album in albums %}
+        <option value="{{ album.id }}">{{ album.name }}</option>
+    {% endfor %}
+</select>
+                                                    </div>
+                                                </div>
+                <div class="mb-3 row"><label for="allow_comments" class="col-lg-4 col-form-label">Allow Comments</label>
+                    <div class="col-lg-6">
+<input class="form-check-label" id="allow_comments" type="checkbox" name="allow_comments" {% if image.allow_comments %}checked{% endif %}>
+                    </div>
+</div>
+<!--                <div class="mb-3 row">-->
+<!--          <label class="col-lg-4 col-form-label" for="hashtags">Choose a hashtag:</label>-->
+<!--  <div style="position: relative;" class="col-lg-6">-->
+<!--    <input type="text" name="hashtags" id="hashtags-input"  class="form-control"autocomplete="off" >-->
+<!--    <div id="hashtags-suggestions" style="position: absolute; top: 100%; left: 0; z-index: 1;"></div>-->
+<!--  </div>-->
+                </div>
+                <div class="mb-3 row">
+                <label class="col-lg-4 col-form-label"  for="selected_hashtags">Select Hashtags:</label>
+                    <div class="col-lg-6">
+        <select name="hashtags" multiple="multiple" id="multi-value-select" class="multi-select form-control">
+            {% for hashtag in all_hashtags %}
+                <option value="{{ hashtag.name }}" {% if hashtag in image.hashtags %}selected{% endif %}>{{ hashtag.name }}</option>
+            {% endfor %}
+            </div>
+        </select>
+                </div>
+                <div class="col-lg-8 ms-auto">
+                                                        <button type="submit" class="btn btn-primary">Submit</button>
+
+                                                    </div>
+        </div>
+
+    </form>
+
+    </div>
+</div>
+
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+<!--    <form method="post">-->
+<!--        <label for="new_caption">New Caption:</label>-->
+<!--        <input type="text" name="new_caption" value="{{ image.caption }}" required>-->
+<!--        <br>-->
+<!--        <input type="submit" value="Update Caption">-->
+<!--    </form>-->
+<script>
+  const hashtagsInput = document.getElementById('hashtags-input');
+  const suggestionsContainer = document.getElementById('hashtags-suggestions');
+
+  hashtagsInput.addEventListener('input', function() {
+    const inputText = hashtagsInput.value;
+
+    // Send an AJAX request to your server to get hashtag suggestions
+    // Replace '/get_hashtag_suggestions' with the actual endpoint on your server
+    fetch(`/get_hashtag_suggestions?input=${inputText}`)
+      .then(response => response.json())
+      .then(data => {
+        // Clear previous suggestions
+        suggestionsContainer.innerHTML = '';
+
+        // Display new suggestions
+        data.forEach(hashtag => {
+          const suggestion = document.createElement('div');
+          suggestion.textContent = hashtag.name;
+          suggestion.addEventListener('click', function() {
+            hashtagsInput.value = hashtag.name;
+            suggestionsContainer.innerHTML = '';
+          });
+          suggestionsContainer.appendChild(suggestion);
+        });
+      });
+  });
+</script>
+{% endblock %}

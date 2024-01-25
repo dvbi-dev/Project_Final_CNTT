@@ -1,0 +1,49 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>List Pin Boards</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--    <h1>List Pin Boards</h1>-->
+<!--    <ul>-->
+<!--        {% for pin_board in pin_boards %}-->
+<!--    <p><a href="{{ url_for('view_pin_board', pin_board_id=pin_board.id) }}">{{ pin_board.name }}</a></p>-->
+<!--&lt;!&ndash;        <form method="post" action="{{ url_for('delete_pin_board', pin_board_id=pin_board.id) }}">&ndash;&gt;-->
+<!--&lt;!&ndash;            <button type="submit">Delete Pin Board</button>&ndash;&gt;-->
+<!--&lt;!&ndash;        </form>&ndash;&gt;-->
+<!--  {% endfor %}-->
+
+<!--    </ul>-->
+<!--</body>-->
+<!--</html>-->
+{% extends 'layout.html' %}
+{% block content %}
+<div class="container-fluid">
+				<div class="row page-titles">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="javascript:void(0)">Pin board</a></li>
+					</ol>
+                </div>
+  <div class="row" >
+      {% for pin_board in pin_boards %}
+   <div class="col-xl-3 col-lg-6 col-sm-6">
+                                                    <div class="card" style="border:0.5 solid black">
+                                                    <div class="pt-4 border-bottom-1 pb-3">
+                                                        <a href="{{ url_for('view_pin_board_user', pin_board_id=pin_board.id) }}" > <center><h2 class="text-primary">{{ pin_board.name }}</h2></center></a>
+                                                    </div>
+                                                        <div class="profile-skills mb-5">
+                                                </div>
+                                                    </div>
+                                                        </div>
+
+  {% endfor %}
+
+
+
+  </div>
+</div>
+{% endblock %}
+
+

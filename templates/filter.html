@@ -1,0 +1,191 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <style>
+        .effect-option {
+            display: inline-block;
+            margin-right: 10px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .effect-option input {
+            display: none;
+        }
+
+        .effect-thumbnail {
+            position: relative;
+            width: 100px; /* Adjust the size as needed */
+            height: 100px; /* Adjust the size as needed */
+            background-size: cover;
+            background-position: center;
+            border: 2px solid transparent; /* Add a border to highlight the selected effect */
+            overflow: hidden; /* Ensure the label is hidden initially */
+        }
+
+        .effect-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: filter 0.3s ease; /* Add a smooth transition effect for the filter property */
+        }
+
+        .effect-label {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-weight:bold;
+            opacity: 0;
+            transition: opacity 0.3s ease; /* Add a smooth transition effect for opacity */
+        }
+
+        .effect-option input:checked + .effect-thumbnail img {
+            filter: brightness(70%); /* Darken the image when checked */
+        }
+
+        .effect-option input:checked + .effect-thumbnail .effect-label {
+            opacity: 1; /* Make the label visible when checked */
+        }
+    </style>
+   <script defer src="https://cdn.jsdelivr.net/npm/img-comparison-slider@8/dist/index.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/img-comparison-slider@8/dist/styles.css">
+<div class="container-fluid">
+				<div class="row page-titles">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="javascript:void(0)">Filter</a></li>
+					</ol>
+                </div>
+<div class="row">
+	<div class="col-xl-6 col-lg-6">
+        <div class="card-body">
+             <div class="basic-form custom_file_input">
+                  <form  action="/filters" method="post" enctype="multipart/form-data" >
+
+        <input type="file" name="file" accept=".png, .jpg, .jpeg" class="form-file-input form-control">
+
+
+        <label class="effect-option">
+            <input type="radio" name="effect" value="cartoon">
+            <div class="effect-thumbnail">
+                <img src="./static/filter/cartoon.png" alt="Cartoon">
+                <div class="effect-label">Cartoon</div>
+            </div>
+        </label>
+
+        <label class="effect-option">
+            <input type="radio" name="effect" value="pixel">
+            <div class="effect-thumbnail">
+                <img src="./static/filter/pixel.png" alt="Pixel">
+                <div class="effect-label">Pixel</div>
+            </div>
+        </label>
+
+        <label class="effect-option">
+            <input type="radio" name="effect" value="daylight">
+            <div class="effect-thumbnail">
+                <img src="./static/filter/daylight.png" alt="Daylight">
+                <div class="effect-label">Daylight</div>
+            </div>
+        </label>
+        <label class="effect-option">
+            <input type="radio" name="effect" value="emboss">
+            <div class="effect-thumbnail">
+                <img src="./static/filter/emboss.png" alt="Emboss">
+                <div class="effect-label">Emboss</div>
+            </div>
+        </label>
+
+        <label class="effect-option">
+            <input type="radio" name="effect" value="tv60">
+            <div class="effect-thumbnail">
+                <img src="./static/filter/tv60.png" alt="TV60">
+                <div class="effect-label">TV60</div>
+            </div>
+        </label>
+
+        <label class="effect-option">
+            <input type="radio" name="effect" value="pencil_sketch_color">
+            <div class="effect-thumbnail">
+                <img src="./static/filter/pencol.png" alt="Pencil Color">
+                <div class="effect-label">Pencil Color</div>
+            </div>
+        </label>
+
+        <label class="effect-option">
+            <input type="radio" name="effect" value="pencil_sketch_grey">
+            <div class="effect-thumbnail">
+                <img src="./static/filter/pengray.png" alt="Pencil Grey">
+                <div class="effect-label">Pencil Grey</div>
+            </div>
+        </label>
+
+        <label class="effect-option">
+            <input type="radio" name="effect" value="sepia">
+            <div class="effect-thumbnail">
+                <img src="./static/filter/sepia.png" alt="Sepia">
+                <div class="effect-label">Sepia</div>
+            </div>
+        </label>
+
+        <label class="effect-option">
+            <input type="radio" name="effect" value="sharpen">
+            <div class="effect-thumbnail">
+                <img src="./static/filter/sharpen.png" alt="Sharpen">
+                <div class="effect-label">Sharpen</div>
+            </div>
+        </label>
+
+        <label class="effect-option">
+            <input type="radio" name="effect" value="invert">
+            <div class="effect-thumbnail">
+                <img src="./static/filter/invert.png" alt="Invert">
+                <div class="effect-label">Invert</div>
+            </div>
+        </label>
+
+        <label class="effect-option">
+            <input type="radio" name="effect" value="HDR">
+            <div class="effect-thumbnail">
+                <img src="./static/filter/hdr.png" alt="HDR">
+                <div class="effect-label">HDR</div>
+            </div>
+        </label>
+
+        <label class="effect-option">
+            <input type="radio" name="effect" value="Winter">
+            <div class="effect-thumbnail">
+                <img src="./static/filter/summer.png" alt="Winter">
+                <div class="effect-label">Summer</div>
+            </div>
+        </label>
+
+        <label class="effect-option">
+            <input type="radio" name="effect" value="Summer">
+            <div class="effect-thumbnail">
+                <img src="./static/filter/winter.png" alt="Summer">
+                <div class="effect-label">Winter</div>
+            </div>
+        </label>
+        <!-- Add more labels for other effects -->
+<div>
+        <button type="submit" class="btn btn-primary">Upload</button></div>
+    </form>
+             </div>
+        </div>
+    </div>
+    <div class="col-xl-6 col-lg-6">
+        <div class="card-body">
+        <img-comparison-slider>
+            <img width="100%" height="300px" slot="first"src="{{url_for('static',filename='uploads/input.png' )}}" alt="Result" >
+        <img width="100%" height="300px" slot="second"src="{{url_for('static',filename='uploads/result.png' )}}" alt="Result" >
+        </img-comparison-slider>
+        </div>
+    </div>
+
+</div>
+
+</div>
+
+
+{% endblock %}

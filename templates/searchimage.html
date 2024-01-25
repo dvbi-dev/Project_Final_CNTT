@@ -1,0 +1,143 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="container-fluid">
+
+
+				<div class="row page-titles">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="javascript:void(0)">Search image</a></li>
+					</ol>
+                </div>
+    <div class="row">
+<div class="col-xl-12 col-lg-12">
+ <div class="card-body">
+                                <div class="basic-form custom_file_input">
+                                    <form id="upload-form" action="{{url_for('searchimage')}}" method= "POST" enctype="multipart/form-data">
+
+
+                                        <div class="input-group mb-3">
+                                            <div class="form-file">
+                                                <input type="file" name="query_img" accept="image/*" class="form-file-input form-control">
+                                            </div>
+											<span class="input-group-text btn btn-primary btn-sm">Upload</span>
+                                        </div>
+
+
+										<center><button  type="submit" class="btn btn-primary">Upload</button></center>
+
+
+
+                                    </form>
+                                </div>
+                            </div>
+</div>
+        <div class="col-xl-6 col-lg-6">
+             <div class="card" style="width:auto;height:auto">
+    <div class="card-body">
+        <div class="column" >
+        <div class="gallery-item new-arrival-product">
+            <div class="new-arrivals-img-contnent" >
+                {% if query_path %}
+          <img src="{{ query_path }}" alt="Imagen 1" />
+                 {% endif %}
+            </div>
+          <div class="hover-elements">
+
+            <div class="bottom-buttons">
+
+
+            </div>
+
+          </div>
+
+        </div>
+
+          </div>
+    </div>
+
+</div>
+        </div>
+    </div>
+    <div class="row page-titles">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="javascript:void(0)">Output</a></li>
+					</ol>
+                </div>
+    <div class="row" data-masonry='{"percentPosition": true }'>
+        {% for result in image_data %}
+
+            <div class="col-lg-12 col-xl-4">
+            <div class="card" style="width:auto;height:auto">
+    <div class="card-body">
+        <div class="column" >
+        <div class="gallery-item new-arrival-product">
+            <div class="new-arrivals-img-contnent" >
+          <img src="{{ url_for('static', filename='uploads/' + result.image_path) }}" alt="Imagen 1" />
+            </div>
+          <div class="hover-elements">
+            <a href="{{ url_for('view_image', image_id=result.id) }}"><button class="btn-save btn btn-primary">Image</button></a>
+            <div class="bottom-buttons">
+              <a href="{{result.link}}"><button class="btn-link"><i class="fa-solid fa-link"></i></button></a>
+
+                <div class="dropdown ms-auto">
+											<a href="#" class="btn btn-primary light sharp" data-bs-toggle="dropdown" aria-expanded="true"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px" viewbox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"></rect><circle fill="#000000" cx="5" cy="12" r="2"></circle><circle fill="#000000" cx="12" cy="12" r="2"></circle><circle fill="#000000" cx="19" cy="12" r="2"></circle></g></svg></a>
+											<ul class="dropdown-menu dropdown-menu-end">
+												<a href="{{ url_for('view_profile', user_id=result.user_id) }}"><li class="dropdown-item"><i class="fa fa-user-circle text-primary me-2"></i> View profile</li></a>
+                                                <a href="{{ url_for('view_image', image_id=result.id) }}"><li class="dropdown-item"><i class="fa-regular fa-image text-primary me-2"></i> View image</li></a>
+
+											</ul>
+										</div>
+            </div>
+            <div class="image-alt">{{result.caption}}</div>
+          </div>
+
+        </div>
+
+          </div>
+    </div>
+
+</div>
+</div>
+        {% endfor %}
+    </div>
+</div>
+<!--<div class="container">-->
+<!--            <h1>image search engine</h1>-->
+<!--            <form method="POST" enctype="multipart/form-data" action="{{ url_for('searchimage') }}">-->
+<!--                <input type="file" name="query_img"><br>-->
+<!--                <input type="submit">-->
+<!--            </form>-->
+<!--            <h2>Query:</h2>-->
+<!--            {% if query_path %}-->
+<!--            <img src="{{ query_path }}" width="300px">-->
+<!--            {% endif %}-->
+<!--            <h2>Results:</h2>-->
+<!--            {% for score in scores %}-->
+
+<!--            <figure style="float: left; margin-right: 20px; margin-bottom: 20px;">-->
+<!--                <img src="{{ score[0] }}" height="200px">-->
+<!--                <-->
+<!--                <figcaption>{{ score[0] }}</figcaption>-->
+<!--            </figure>-->
+<!--            {% endfor %}-->
+<!--      {% if image_paths %}-->
+<!--        <ul>-->
+<!--            {% for path in image_paths %}-->
+<!--                <li>{{ path }}</li>-->
+<!--            <li>{{path.user.username}}</li>-->
+<!--            {% endfor %}-->
+<!--        </ul>-->
+<!--    {% else %}-->
+<!--        <p>No images found.</p>-->
+<!--    {% endif %}-->
+<!--    {% for result in image_data %}-->
+<!--     <img src="{{ url_for('static', filename='uploads/'+result.image_path) }}" alt="Result Image">-->
+<!--            <li>{{ result.image_path }} - Uploaded by: {{ result.username }}</li>-->
+<!-- <a href="{{ url_for('view_profile', user_id=result.user_id) }}">View Profile</a>-->
+<!--        {% endfor %}-->
+<!--         &lt;!&ndash; ... (other HTML content) ... &ndash;&gt;-->
+
+
+<!--        </div>-->
+{% endblock %}

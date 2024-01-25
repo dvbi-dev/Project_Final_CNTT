@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Albums</title>
+</head>
+<body>
+    <h1>{{ user.username }}'s Albums</h1>
+    <ul>
+        {% for album in albums %}
+            <li>
+                <p>{{album.name}}</p>
+
+
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{{ url_for('create_album') }}">Create New Album</a>
+    <a href="{{ url_for('update_album', album_id=album.id) }}">Update</a>
+    <a href="{{ url_for('delete_album', album_id=album.id) }}">Delete</a>
+</body>
+</html>

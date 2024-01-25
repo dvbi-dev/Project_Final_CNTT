@@ -1,0 +1,15 @@
+{% for image in images %}
+  <img src="{{ url_for('static', filename='uploads/' + image.image_path) }}" alt="{{ image.caption }}">
+  
+  {% if image.album_id is None %}
+    <form action="{{ url_for('add_to_album', image_id=image.id) }}" method="post">
+      <label for="album_id">Select an album:</label>
+      <select name="album_id">
+        {% for album in albums %}
+          <option value="{{ album.id }}">{{ album.name }}</option>
+        {% endfor %}
+      </select>
+      <button type="submit">Add to Album</button>
+    </form>
+  {% endif %}
+{% endfor %}

@@ -1,0 +1,40 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <script defer src="https://cdn.jsdelivr.net/npm/img-comparison-slider@8/dist/index.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/img-comparison-slider@8/dist/styles.css"
+/>
+
+<style type="text/css">
+  .img-comparison-slider {
+    --divider-width: 2px;
+    --divider-color: #c0c0c0;
+    --default-handle-opacity: 0.3;
+
+  }
+  </style>
+
+<div class="container-fluid">
+
+
+				<div class="row page-titles">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item active"><a href="javascript:void(0)">App</a></li>
+						<li class="breadcrumb-item"><a href="javascript:void(0)">Confirm</a></li>
+					</ol>
+                </div>
+<div class="row">
+ <div class="col-xl-12">
+<div class="card">
+    <img-comparison-slider >
+  <img slot="first" width="100%"src="{{ url_for('static', filename='images/' + image_names[0]) }}" alt="Processed Image">
+    <img slot="second"width="100%" src="{{ url_for('static', filename='images/' + processed_image) }}" alt="Processed Image">
+</img-comparison-slider>
+
+</div>
+</div>
+    <!-- Display the processed image -->
+</div>
+</div>
+{% endblock %}
+    <!-- Add other elements or information if needed -->
+

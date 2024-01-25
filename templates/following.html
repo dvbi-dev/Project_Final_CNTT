@@ -1,0 +1,85 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="container-fluid">
+
+
+				<div class="row page-titles">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item active"><a href="javascript:void(0)">App</a></li>
+						<li class="breadcrumb-item"><a href="javascript:void(0)">Follow</a></li>
+					</ol>
+                </div>
+<div class="row">
+
+    <div class="col-xl-12">
+						<div class="row">
+                            {% for follow in following_users %}
+							<div class="col-xl-3 col-xxl-4 col-lg-4 col-md-6 col-sm-6 items">
+								<div class="card contact-bx item-content">
+									<div class="card-header border-0">
+										<div class="action-dropdown">
+											<div class="dropdown ">
+												<div class="btn-link" data-bs-toggle="dropdown">
+													<svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+														<circle cx="12.4999" cy="3.5" r="2.5" fill="#A5A5A5"></circle>
+														<circle cx="12.4999" cy="11.5" r="2.5" fill="#A5A5A5"></circle>
+														<circle cx="12.4999" cy="19.5" r="2.5" fill="#A5A5A5"></circle>
+													</svg>
+												</div>
+												<div class="dropdown-menu dropdown-menu-right">
+													<a class="dropdown-item" href="javascript:void(0)">Delete</a>
+													<a class="dropdown-item" href="javascript:void(0)">Edit</a>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="card-body user-profile">
+										<div class="image-bx">
+											{% if follow.following.avatar %}
+											<img src="{{ url_for('static', filename='uploads/'+follow.following.avatar)  }}" data-src="images/contacts/Untitled-3.jpg" alt="" class="rounded-circle">
+											{% else%}
+											<img src="{{ url_for('static', filename='uploads/default_avatar.png')  }}" data-src="images/contacts/Untitled-3.jpg" alt="" class="rounded-circle">
+											     {% endif %}
+											<span class="active"></span>
+										</div>
+										<div class="media-body user-meta-info">
+											<h6 class="fs-18 font-w600 my-1"><a href="app-profile.html" class="text-black user-name" data-name="Alan Green">{{ follow.following.username }}</a></h6>
+
+<!--											<ul>-->
+<!--												<li><a href="javascript:void(0);"><i class="fas fa-phone-alt"></i></a></li>-->
+<!--												<li><a href="javascript:void(0);"><i class="far fa-comment-alt"></i></a></li>-->
+<!--												<li><a href="javascript:void(0);"><i class="fas fa-video"></i></a></li>-->
+<!--											</ul>-->
+										</div>
+                                         <div class="profile-email px-2 pt-2">
+                                         <a class="btn btn-primary mb-1 me-1" href="{{ url_for('view_profile', user_id=follow.following.id) }}">View Profile</a>
+
+
+
+												</div>
+									</div>
+								</div>
+							</div>
+                            {% endfor %}
+                        </div>
+    </div>
+</div>
+</div>
+{% endblock %}
+<!--&lt;!&ndash; following.html &ndash;&gt;-->
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Following Users</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--    <h1>Users You Are Following</h1>-->
+
+<!--    {% for follow in following_users %}-->
+<!--        <p>{{ follow.following.username }}</p><a href="{{ url_for('view_profile', user_id=follow.following.id) }}">View Profile</a>-->
+<!--    {% endfor %}-->
+<!--</body>-->
+<!--</html>-->

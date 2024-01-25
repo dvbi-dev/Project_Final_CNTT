@@ -1,0 +1,55 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+
+
+
+
+
+
+
+<div class="container-fluid">
+				<div class="row page-titles">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="javascript:void(0)">Search Results for Hashtag: {{ hashtag }}</a></li>
+					</ol>
+                </div>
+          <div class="row" data-masonry='{"percentPosition": true }'>
+
+              {% if images %}
+              {% for image in images %}
+              <div class="col-lg-12 col-xl-4">
+            <div class="card" style="width:auto;height:auto">
+    <div class="card-body">
+        <div class="column" >
+        <div class="gallery-item new-arrival-product">
+            <div class="new-arrivals-img-contnent" >
+          <img src="{{ url_for('static', filename='uploads/' + image.image_path) }}" alt="Imagen 1" />
+            </div>
+          <div class="hover-elements">
+            <button class="btn-save">Guardar</button>
+            <div class="bottom-buttons">
+              <button class="btn-link">🔗</button>
+              <button class="btn-more">•••</button>
+            </div>
+            <div class="image-alt">SciFi</div>
+          </div>
+
+        </div>
+
+          </div>
+    </div>
+
+</div>
+</div>
+
+              {% endfor %}
+              {% endif %}
+          </div>
+</div>
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saved Images</title>
+</head>
+<body>
+    <h1>Saved Images</h1>
+    {% if user %}
+        <p>Welcome, {{ user.username }}!</p>
+        {% if saved_images %}
+            <div>
+                {% for saved_image in saved_images %}
+                    <img src="{{ url_for('static', filename='uploads/' + saved_image.image.image_path) }}" alt="{{ saved_image.image.caption }}">
+                    <form method="post" action="{{ url_for('unsave_image', image_id=saved_image.image.id) }}">
+                        <button type="submit">Unsave</button>
+                    </form>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No saved images yet.</p>
+        {% endif %}
+    {% else %}
+        <p>Please log in to view saved images.</p>
+    {% endif %}
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suggested Hashtags</title>
+</head>
+<body>
+    <h1>Suggested Hashtags</h1>
+    <ul>
+        {% for hashtag in suggested_hashtags %}
+            <a href="{{ url_for('images_by_hashtag', hashtag_name=hashtag.name) }}"><button class="btn btn-primary mb-2">{{ hashtag.name }}</button></a>
+        {% endfor %}
+    </ul>
+</body>
+</html>

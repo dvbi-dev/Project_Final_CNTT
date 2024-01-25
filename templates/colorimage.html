@@ -1,0 +1,155 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--  <head>-->
+<!--    <meta charset="UTF-8" />-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0" />-->
+<!--    <title>Image Colorization</title>-->
+<!--    <style>-->
+<!--    body {-->
+
+<!--      align-items: center;-->
+<!--      justify-content: center;-->
+<!--      height: 1000px;-->
+<!--      background-repeat: no-repeat;-->
+<!--      background-size: cover;-->
+<!--    }-->
+<!--    :root{-->
+<!--      &#45;&#45;primary-button-color: #007bff;-->
+<!--      &#45;&#45;primary-text-color: #fff;-->
+<!--    }-->
+<!--    .container {-->
+<!--      margin: auto;-->
+<!--      align-items: center;-->
+<!--      justify-content: center;-->
+<!--      padding-left: 300px;-->
+<!--      padding-right: 300px;-->
+<!--    }-->
+<!--    .title {-->
+<!--      font-size: 50px;-->
+<!--      color: #ddd;-->
+<!--    }-->
+<!--    .des {-->
+<!--      font-size: 20px;-->
+<!--      color: #ddd;-->
+<!--      text-align: center;-->
+<!--    }-->
+<!--    .preview {-->
+<!--      border-radius: 10px;-->
+<!--      padding: 30px;-->
+<!--      display: flex;-->
+<!--      align-items: center;-->
+<!--      justify-content: center;-->
+<!--      flex-direction: column;-->
+<!--      width: 100%;-->
+<!--      max-width: 350px;-->
+<!--      margin: auto;-->
+<!--      background-color: rgb(255, 255, 255);-->
+<!--      box-shadow: 0 0 20px rgba(170, 170, 170, 0.2);-->
+<!--    }-->
+<!--    .bg-img {-->
+<!--      height: 100vh;-->
+<!--      width: 100vh;-->
+<!--      object-fit: cover;-->
+<!--      filter: brightness(0.6);-->
+<!--      position: absolute;-->
+<!--      top: 0;-->
+<!--      left: 0;-->
+<!--      z-index: -1;-->
+<!--    }-->
+<!--    .container #upload {-->
+<!--      /* background-color: var(&#45;&#45;primary-button-color);-->
+<!--      border: 0;-->
+<!--      border-radius: 40px;-->
+<!--      color: var(&#45;&#45;primary-text-color);-->
+<!--      cursor: pointer;-->
+<!--      font-family: "Montserrat",sans-serif;-->
+<!--      padding: 10px 20px;-->
+<!--      text-align: center */-->
+<!--      background: linear-gradient(90deg,#26ffa5,#2643ff 99%);-->
+<!--      border-radius: 2.5rem!important;-->
+<!--      font-size: 1rem!important;-->
+<!--      font-weight: 600!important;-->
+<!--      line-height: 1.5rem!important;-->
+<!--      padding: 1rem 4.375rem;-->
+<!--      color: #fff!important;-->
+<!--      height: auto!important;-->
+<!--      border: 0;-->
+<!--      position: relative;-->
+<!--      cursor: pointer;-->
+<!--    }-->
+<!--    label {-->
+<!--      margin: 16px 0;-->
+<!--      font-size: 22px;-->
+<!--      font-weight: 500;-->
+<!--      line-height: 28px;-->
+<!--      color: #1b1b1b;-->
+<!--    }-->
+<!--    .active {-->
+<!--      background-color: #4CAF50;-->
+<!--    }-->
+
+<!--      </style>-->
+<!--  </head>-->
+<!--  <body>-->
+<!--    &lt;!&ndash; <img class="bg-img"/> &ndash;&gt;-->
+<!--    <div class="container">-->
+
+<!--        <form method="post" action="/upcolorimage" enctype="multipart/form-data">-->
+<!--            <div class="preview">-->
+<!--                <img id="img-preview" src="#" alt="Preview" style="display: none; max-width: 100%; max-height: 200px;">-->
+<!--                <label for="file-input">Upload Image</label>-->
+<!--                <input accept="image/*" type="file" id="file-input" name="image" title=/><br><br>-->
+<!--                <button class="hidden" type="submit" id="upload" name="upload">Make Color</button>-->
+<!--            </div>-->
+<!--        </form>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </body>-->
+
+
+<!--</html>-->
+{% extends 'layout.html' %}
+{% block content %}
+      <script defer src="https://cdn.jsdelivr.net/npm/img-comparison-slider@8/dist/index.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/img-comparison-slider@8/dist/styles.css">
+<div class="row">
+	<div class="col-xl-12 col-lg-12">
+        <div class="card-body">
+             <div class="basic-form custom_file_input">
+                                    <form id="upload-form"  action="/upcolorimage" method= "POST" enctype="multipart/form-data">
+
+
+                                        <div class="input-group mb-3">
+                                            <div class="form-file">
+                                                <input type="file" name="image" accept="image/*" class="form-file-input form-control">
+                                            </div>
+											<span class="input-group-text btn btn-primary btn-sm">Upload</span>
+                                        </div>
+
+
+										<center><button  type="submit" class="btn btn-primary">Upload</button></center>
+
+
+
+                                    </form>
+                                </div>
+
+
+
+
+
+
+<!--            <img-comparison-slider>-->
+<!--  <img slot="first"width="100%" src="data:image/jpeg;base64,{{oimg}}" alt="Color" />-->
+
+<!--  <img slot="second"width="100%" src="data:image/jpeg;base64,{{img}}" alt="B/W" />-->
+<!--   </img-comparison-slider>-->
+        </div>
+    </div>
+</div>
+
+
+
+
+
+{% endblock %}

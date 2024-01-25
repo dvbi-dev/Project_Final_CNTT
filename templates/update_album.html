@@ -1,0 +1,40 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="container-fluid">
+
+
+				<div class="row page-titles">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item active"><a href="javascript:void(0)">App</a></li>
+						<li class="breadcrumb-item"><a href="javascript:void(0)">Update Album</a></li>
+					</ol>
+                </div>
+    <div class="row">
+        <div class="col-xl-12">
+            <form method="post" action="{{ url_for('update_album', album_id=album.id) }}">
+        <div class="mb-3 row">
+                                                    <label class="col-lg-4 col-form-label" for="validationCustom03">Album name
+                                                    </label>
+                                                    <div class="col-lg-6">
+                                                        <input value="{{album.name}}" name="album_name" type="text" class="form-control" id="validationCustom03" placeholder="Your valid email.." required="">
+														<div class="invalid-feedback">
+
+														</div>
+                                                    </div>
+                                                </div>
+        <div class="col-lg-8 ms-auto">
+                                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                                    </div>
+    </form>
+        </div>
+    </div>
+</div>
+<!--    <h1>Update Album</h1>-->
+<!--    <form method="post" action="{{ url_for('update_album', album_id=album.id) }}">-->
+<!--        <label for="new_album_name">New Album Name:</label>-->
+<!--        <input type="text" id="new_album_name" name="album_name" value="{{ album.name }}" required>-->
+<!--        <button type="submit">Update Album</button>-->
+<!--    </form>-->
+
+
+{% endblock %}

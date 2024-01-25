@@ -1,0 +1,34 @@
+{% extends 'admin/layout.html' %}
+{% block content %}
+<div class="container-fluid" id="container-wrapper">
+	<div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Image detail</h1>
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="./">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page"> Image </li>
+            </ol>
+          </div>
+    <div class="row">
+        <div class="col-lg-6">
+
+                <div class="card-body">
+                     <img src="{{ url_for('static', filename='uploads/' + image.image_path) }}" alt="{{ image.caption }}" style="width:100%;height:100%">
+                </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card-header py-3  align-items-center justify-content-between">
+                  <h4 class="m-0 font-weight-bold text-primary">Caption: {{image.caption }}</h4>
+                <p class="m-0 font-weight-bold text-primary">Description: {{ image.description }}</p>
+                <p class="m-0 font-weight-bold text-primary">Link: {{ image.link }}</p>
+                <p class="m-0 font-weight-bold text-primary">View: {{ image.views }}</p>
+                </div>
+        </div>
+    </div>
+</div>
+    <div>
+
+<!--        <p>{{ image.caption }}</p>-->
+<!--        <p>{{ image.description }}</p>-->
+        <!-- Add more details or styling as needed -->
+    </div>
+{% endblock %}

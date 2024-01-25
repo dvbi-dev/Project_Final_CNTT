@@ -1,0 +1,118 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+    <!-- Add these lines to your HTML head -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css">
+<script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+<div class="container-fluid">
+				<div class="row page-titles">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="javascript:void(0)">Image caption (People image not image art)</a></li>
+					</ol>
+                </div>
+          <div class="row">
+              <div class="col-lg-12">
+                  <div class="card-body">
+                                <div class="basic-form custom_file_input">
+                                    <input type="file" id="uploadInput" accept="image/*" class="form-file-input form-control">
+    <button onclick="predict()" class="btn btn-primary">Generate</button>
+                                </div>
+                  </div>
+                   <div class="card-header">
+                           <div id="progress-container">
+        <p class="text-content">Loading...</p>
+        <div id="progress-bar"></div>
+    </div>
+                       <img id="uploaded-image" alt="Uploaded Image" width="300">
+    <div id="result" class="text-content"></div>
+                   </div>
+              </div>
+          </div>
+</div>
+<!--    <input type="file" id="uploadInput" accept="image/*">-->
+<!--    <button onclick="predict()">Generate</button>-->
+<!--    <div id="progress-container">-->
+<!--        <p>Loading...</p>-->
+<!--        <div id="progress-bar"></div>-->
+<!--    </div>-->
+<!--    <div id="result"></div>-->
+
+<!-- ... -->
+<!-- ... -->
+<script>
+    function predict() {
+        var input = document.getElementById('uploadInput');
+        var file = input.files[0];
+
+        var formData = new FormData();
+        formData.append('file', file);
+
+        // Display loading message
+        document.getElementById('result').innerHTML = '';
+        document.getElementById('progress-container').style.display = 'block';
+        document.getElementById('progress-bar').style.width = '0%';
+
+        var startTime = new Date().getTime();
+
+        // Start nprogress
+        NProgress.start();
+
+        var xhr = new XMLHttpRequest();
+
+        xhr.upload.addEventListener('progress', function (e) {
+            if (e.lengthComputable) {
+                var percentCompleted = Math.round((e.loaded / e.total) * 100);
+                document.getElementById('progress-bar').style.width = percentCompleted + '%';
+                var currentTime = new Date().getTime();
+                var elapsedSeconds = (currentTime - startTime) / 1000; // in seconds
+                document.getElementById('timer').innerText = elapsedSeconds.toFixed(2);
+            }
+        });
+
+        xhr.open('POST', '/imagecaps', true);
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                // Request completed successfully
+                clearInterval(timerInterval); // Stop updating the timer
+
+                var endTime = new Date().getTime();
+                var processingTime = (endTime - startTime) / 1000; // in seconds
+
+                var data = JSON.parse(xhr.responseText);
+                document.getElementById('uploaded-image').src = data.file_path;
+                if ('result' in data) {
+                    var resultHtml = '<p>Output 1: ' + data.result.greedy + '</p>';
+                    resultHtml += '<p>Output 2: ' + data.result.beam_3 + '</p>';
+                    resultHtml += '<p>Output 3: ' + data.result.beam_5 + '</p>';
+                    resultHtml += '<p>Processing Time: ' + processingTime.toFixed(2) + ' seconds</p>';
+                    document.getElementById('result').innerHTML = resultHtml;
+                } else if ('error' in data) {
+                    document.getElementById('result').innerHTML = '<p>Error: ' + data.error + '</p>';
+                } else {
+                    document.getElementById('result').innerHTML = '<p>Unexpected response</p>';
+                }
+
+                // Hide the loading indicator
+                document.getElementById('progress-container').style.display = 'none';
+
+                // End nprogress
+                NProgress.done();
+            }
+        };
+
+        xhr.send(formData);
+
+        // Update timer every 100 milliseconds
+        var timerInterval = setInterval(function () {
+            var currentTime = new Date().getTime();
+            var elapsedSeconds = (currentTime - startTime) / 1000; // in seconds
+            document.getElementById('timer').innerText = elapsedSeconds.toFixed(2);
+        }, 100);
+    }
+</script>
+<!-- ... -->
+
+<!-- ... -->
+
+{% endblock %}

@@ -1,0 +1,82 @@
+{% extends 'admin/layout.html' %}
+{% block content %}
+<div class="container-fluid" id="container-wrapper">
+	<div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Image comment</h1>
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="./">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page"> Comment</li>
+            </ol>
+          </div>
+    <div class="row">
+        <div class="col-lg-12">
+        <div class="card mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-primary">DataTable</h6>
+                </div>
+                <div class="table-responsive p-3">
+                  <table class="table align-items-center table-flush" id="dataTable">
+                    <thead class="thead-light">
+                      <tr>
+                          <th>ID</th>
+                        <th>Username</th>
+                          <th>Email</th>
+                          <th>Avatar</th>
+                          <th>Status</th>
+                      </tr>
+                    </thead>
+                    <tfoot>
+                      <tr>
+                          <th>ID</th>
+                        <th>Username</th>
+                          <th>Email</th>
+                          <th>Avatar</th>
+                        <th>Status</th>
+
+                      </tr>
+                    </tfoot>
+                    <tbody>
+                      <tr>
+                        <td></td>
+                        <td></td>
+                          <td></td>
+                          <td></td>
+
+                    {% for user in users %}
+
+                      <tr>
+                          <td>{{loop.index}}</td>
+                          <td><a href="{{ url_for('user_images_admin', user_id=user.id) }}">{{ user.username }}</a></td>
+                          <td>{{user.email}}</td>
+                          <td>
+                              {% if user.avatar %}
+                              <img src="{{url_for('static',filename='uploads/' +user.avatar)}}" style="width:50px;height:50px;">
+                              {% else%}
+                              <img src="{{ url_for('static', filename='uploads/default_avatar.png') }}" width="56" alt="Default Avatar">
+                          {% endif %}
+                          </td>
+<!--                          {% if user.type==2%}-->
+<!--                          <td><a href="{{ url_for('block_user_admin', user_id=user.id) }}">Block</a></td>-->
+<!--                          {% else%}-->
+<!--                           <td><a href="{{ url_for('block_user_admin', user_id=user.id) }}">Blocked</a></td>-->
+<!--                          {% endif%}-->
+                          {% if user.type==2%}
+                          <td><a href="{{ url_for('block_user_admin_mail', user_id=user.id) }}">Block</a></td>
+                          {% else%}
+                           <td><a href="{{ url_for('block_user_admin_mail', user_id=user.id) }}">Blocked</a></td>
+                          {% endif%}
+                      </tr>
+
+
+            <!-- Add more details or styling as needed -->
+        {% endfor %}
+
+
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+    </div></div>
+
+</div>
+{% endblock %}

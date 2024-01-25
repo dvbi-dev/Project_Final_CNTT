@@ -1,0 +1,78 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="container-fluid">
+
+
+				<div class="row page-titles">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item active"><a href="javascript:void(0)">App</a></li>
+						<li class="breadcrumb-item"><a href="javascript:void(0)">Upload avatar</a></li>
+					</ol>
+                </div>
+    <div class="row">
+        <div class="col-xl-12">
+            <script>
+    function readurl(input){
+        if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#preview')
+                .attr('src', e.target.result);
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+    }
+</script>
+        <div class="row">
+        <div class="col">
+            <img src="/static/img/default-img.jpg" id="preview" width="500" height="500">
+        </div>
+        <div class="col">
+            <form  method="POST" action="/update_avatar" enctype="multipart/form-data" >
+             <div class="mb-3 row">
+                                                    <label class="col-lg-4 col-form-label" >Upload avatar
+                                                    </label>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-file">
+                                                <input  name="avatar" onchange="readurl(this)" type="file" class="form-file-input form-control">
+                                            </div>
+                                                    </div>
+                                                </div>
+            <div class="mb-3 row">
+                                                    <div class="col-lg-8 ms-auto">
+                                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                                    </div>
+                                                </div>
+            </form>
+        </div>
+    </div>
+    </div>
+
+    </div>
+<!--        <form method="POST" action="/update_avatar" enctype="multipart/form-data">-->
+<!--        <label for="avatar">Choose a new avatar:</label>-->
+<!--        <input type="file" name="avatar" accept="image/*" required><br>-->
+
+<!--        <input type="submit" value="Update Avatar">-->
+<!--    </form>-->
+</div>
+{% endblock %}
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Update Avatar</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--    <h2>Update Avatar</h2>-->
+<!--    <form method="POST" action="/update_avatar" enctype="multipart/form-data">-->
+<!--        <label for="avatar">Choose a new avatar:</label>-->
+<!--        <input type="file" name="avatar" accept="image/*" required><br>-->
+
+<!--        <input type="submit" value="Update Avatar">-->
+<!--    </form>-->
+<!--</body>-->
+<!--</html>-->

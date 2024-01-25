@@ -1,0 +1,57 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<!-- templates/search_hashtag.html -->
+<div class="container-fluid">
+				<div class="row page-titles">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="javascript:void(0)">Search image</a></li>
+					</ol>
+                </div>
+    <div class="rows">
+
+        <div class="col-lg-12">
+                        <div class="card">
+
+                            <div class="card-body">
+                                <div class="basic-form">
+                                    <form method="post" action="{{ url_for('search_hashtag') }}"class="form-valide-with-icon needs-validation" novalidate="">
+                                        <div class="mb-3">
+
+
+                                            <label class="text-label form-label" for="validationCustomUsername">Search</label>
+                                            <div class="input-group">
+
+
+                                                 <select class="multi-select" name="hashtag" multiple="multiple" id="validationCustomUsername" class="multi-select-placeholder js-states">
+                                    {% for hashtag in all_hashtags %}
+                <option value="{{ hashtag.name }}">{{ hashtag.name }}</option>
+            {% endfor %}
+                                </select>
+
+                                            </div>
+                                        </div>
+
+
+                                        <center><button type="submit" class="btn me-2 btn-primary">Submit</button></center>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        <div class="col-lg-12">
+            {% for hashtag in hashtags %}
+
+            <a href="{{ url_for('images_by_hashtag', hashtag_name=hashtag.name) }}"><button class="btn btn-primary mb-2">{{ hashtag.name }}</button></a>
+        {% endfor %}</div>
+    </div>
+</div>
+<!--<form method="post" action="{{ url_for('search_hashtag') }}">-->
+<!--    <label for="hashtag">Enter Hashtag:</label>-->
+<!--    <input type="text" id="hashtag" name="hashtag" required>-->
+<!--    <button type="submit">Search</button>-->
+<!--</form>-->
+
+{% endblock %}

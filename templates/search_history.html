@@ -1,0 +1,205 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+<div class="container-fluid">
+				<div class="row page-titles">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="javascript:void(0)">Recommend hashtag</a></li>
+					</ol>
+                </div>
+	<div class="col-lg-12">
+	{% for hashtag in recommended_hashtags_objects %}
+            <a href="{{ url_for('images_by_hashtag', hashtag_name=hashtag.name) }}"><button class="btn btn-primary mb-2">{{ hashtag.name }}</button></a>
+        {% endfor %}
+	</div>
+	<div class="row page-titles">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="javascript:void(0)">Recommend User</a></li>
+					</ol>
+                </div>
+    <div class="row">
+
+    <div class="col-xl-12">
+						<div class="row">
+                            {% for user in recommend_users %}
+							<div class="col-xl-3 col-xxl-4 col-lg-4 col-md-6 col-sm-6 items">
+								<div class="card contact-bx item-content">
+									<div class="card-header border-0">
+										<div class="action-dropdown">
+											<div class="dropdown ">
+												<div class="btn-link" data-bs-toggle="dropdown">
+													<svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+														<circle cx="12.4999" cy="3.5" r="2.5" fill="#A5A5A5"></circle>
+														<circle cx="12.4999" cy="11.5" r="2.5" fill="#A5A5A5"></circle>
+														<circle cx="12.4999" cy="19.5" r="2.5" fill="#A5A5A5"></circle>
+													</svg>
+												</div>
+												<div class="dropdown-menu dropdown-menu-right">
+													<a class="dropdown-item" href="javascript:void(0)">Delete</a>
+													<a class="dropdown-item" href="javascript:void(0)">Edit</a>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="card-body user-profile">
+										<div class="image-bx">
+											{% if user.avatar %}
+											<img src="{{ url_for('static', filename='uploads/'+user.avatar)  }}"  alt="" class="rounded-circle">
+											{% else%}
+											<img src="{{ url_for('static', filename='uploads/default_avatar.png')  }}" alt="" class="rounded-circle">
+											{% endif %}
+											<span class="active"></span>
+										</div>
+										<div class="media-body user-meta-info">
+											<h6 class="fs-18 font-w600 my-1"><a href="{{ url_for('view_profile', user_id=user.id) }}" class="text-black user-name" data-name="Alan Green">{{ user.username }}</a></h6>
+
+<!--											<ul>-->
+<!--												<li><a href="javascript:void(0);"><i class="fas fa-phone-alt"></i></a></li>-->
+<!--												<li><a href="javascript:void(0);"><i class="far fa-comment-alt"></i></a></li>-->
+<!--												<li><a href="javascript:void(0);"><i class="fas fa-video"></i></a></li>-->
+<!--											</ul>-->
+										</div>
+                                         <div class="profile-email px-2 pt-2">
+                                                   {% if user.is_following(user) %}
+
+            <form method="post" action="{{ url_for('unfollow', user_id=user.id) }}">
+                <input type="submit" class="btn btn-primary mb-1 me-1" value="Unfollow">
+            </form>
+        {% else %}
+            <form method="post" action="{{ url_for('follow', user_id=user.id) }}">
+                <input type="submit"class="btn btn-primary mb-1 me-1" value="Follow">
+            </form>
+        {% endif %}
+
+
+
+												</div>
+									</div>
+								</div>
+							</div>
+                            {% endfor %}
+                        </div>
+    </div>
+</div>
+	<div class="row page-titles">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="javascript:void(0)">Recommend Pin board</a></li>
+					</ol>
+                </div>
+	<div class="row">
+		{% for pin_board in suggested_pin_boards %}
+                  <div class="col-xl-3 col-lg-6 col-sm-6">
+                                                    <div class="card" style="border:0.5 solid black">
+                                                    <div class="pt-4 border-bottom-1 pb-3">
+                                                        <a href="{{ url_for('view_pin_board_user', pin_board_id=pin_board.id) }}" > <center><h2 class="text-primary">{{ pin_board.name }}</h2></center></a>
+                                                    </div>
+                                                        <div class="profile-skills mb-5">
+                                                </div>
+                                                    </div>
+                                                        </div>
+            {% endfor %}
+	</div>
+	<div class="row page-titles">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="javascript:void(0)">Recommend Image</a></li>
+					</ol>
+                </div>
+          <div class="row" data-masonry='{"percentPosition": true }'>
+             {% for image in image_data %}
+                <div class="col-lg-12 col-xl-4">
+            <div class="card" style="width:auto;height:auto">
+    <div class="card-body">
+        <div class="column" >
+        <div class="gallery-item new-arrival-product">
+            <div class="new-arrivals-img-contnent" >
+          <img src="{{ url_for('static', filename='uploads/' + image.image_path) }}" alt="Imagen 1" />
+            </div>
+          <div class="hover-elements">
+            <a href="{{ url_for('view_image', image_id=image.id) }}"><button class="btn-save btn btn-primary">Image</button></a>
+            <div class="bottom-buttons">
+              <a href="{{image.link}}"><button class="btn-link"><i class="fa-solid fa-link"></i></button></a>
+
+                <div class="dropdown ms-auto">
+											<a href="#" class="btn btn-primary light sharp" data-bs-toggle="dropdown" aria-expanded="true"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px" viewbox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"></rect><circle fill="#000000" cx="5" cy="12" r="2"></circle><circle fill="#000000" cx="12" cy="12" r="2"></circle><circle fill="#000000" cx="19" cy="12" r="2"></circle></g></svg></a>
+											<ul class="dropdown-menu dropdown-menu-end">
+												<a href="{{ url_for('view_profile', user_id=image.id) }}"><li class="dropdown-item"><i class="fa fa-user-circle text-primary me-2"></i> View profile</li></a>
+                                                <a href="{{ url_for('view_image', image_id=image.id) }}"><li class="dropdown-item"><i class="fa-regular fa-image text-primary me-2"></i> View image</li></a>
+
+											</ul>
+										</div>
+            </div>
+            <div class="image-alt">{{image.caption}}</div>
+          </div>
+
+        </div>
+
+          </div>
+    </div>
+
+</div>
+</div>
+<!--              <div class="col-lg-12 col-xl-4" style="height:auto">-->
+<!--                        <div class="card" style="height:auto">-->
+<!--                            <div class="card-body" >-->
+
+<!--                                <div class="new-arrival-product" >-->
+
+<!--                                    <div class="new-arrivals-img-contnent">-->
+
+<!--                                       <a><img class="img-fluid  w-100 rounded" src="{{ url_for('static', filename='uploads/'+image.image_path) }}" alt="" ></a>-->
+
+<!--                                    </div>-->
+<!--                                    <div class="new-arrival-content text-center mt-3">-->
+
+
+<!--                                </div>-->
+<!--                                    <div class="btn-group">-->
+<!--                                        {% if 'user_id' in session %}-->
+<!--                                        {% if current_user.has_liked(image) %}-->
+<!--                                        <form method="post" action="{{ url_for('unlike_image', image_id=image.id) }}">-->
+<!--                                         <button type="submit" class="btn btn-secondary" style="border-top-right-radius:0px;border-bottom-right-radius:0px"><span class="me-2"><i class="fa fa-thumbs-up"></i></span>Like</button>-->
+<!--                                        </form>-->
+<!--                                        {% else %}-->
+<!--                                        <form method="post" action="{{ url_for('like_image', image_id=image.id) }}">-->
+<!--                                        <button type="submit" class="btn btn-secondary" style="border-top-right-radius:0px;border-bottom-right-radius:0px"><span class="me-2"><i class="fa fa-thumbs-up"></i></span>Unline</button>-->
+<!--                                        </form>-->
+<!--                                         {% endif %}-->
+<!--                                        {% endif %}-->
+<!--                                        <button type="button" class="btn btn-primary" ><a href="{{ url_for('view_profile', user_id=image.id) }}" style="color:white"><span class="me-2"><i class="fa fa-user"></i></span>User</a></button>-->
+<!--                                    <button type="button" class="btn btn-info"><a href="{{ url_for('view_image', image_id=image.id) }}" style="color:white">Image</a></button>-->
+<!--                                    </div>-->
+
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+{% endfor %}
+          </div>
+</div>
+
+
+
+<!--    {% if latest_image %}-->
+<!--        <div>-->
+<!--            <img src="{{ url_for('static', filename='uploads/' + latest_image.image_path) }}" alt="Latest Image">-->
+<!--            <p>Caption: {{ latest_image.caption }}</p>-->
+
+<!--        </div>-->
+<!--    {% else %}-->
+<!--        <p>No view history available.</p>-->
+<!--    {% endif %}-->
+<!--{% if scores %}-->
+<!--        <h2>Search Results</h2>-->
+<!--        {% for image in image_data %}-->
+<!--            <div>-->
+<!--                <img src="{{ url_for('static', filename='uploads/'+image.image_path) }}" alt="Result Image">-->
+<!--                <p>{{image.image_path}}</p>-->
+<!--                <p>Username: {{ image.username }}</p>-->
+<!--                <p>User ID: {{ image.user_id }}</p>-->
+<!--            </div>-->
+<!--        {% endfor %}-->
+<!--    {% else %}-->
+<!--        <p>No search results available.</p>-->
+<!--    {% endif %}-->
+<!--    -->
+{% endblock %}

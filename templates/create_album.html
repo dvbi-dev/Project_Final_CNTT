@@ -1,0 +1,51 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="container-fluid">
+
+
+				<div class="row page-titles">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item active"><a href="javascript:void(0)">App</a></li>
+						<li class="breadcrumb-item"><a href="javascript:void(0)">Album</a></li>
+					</ol>
+                </div>
+    <div class="row">
+        <form method="post" action="{{ url_for('create_album') }}">
+            <div class="card">
+        <div class="col-xl-12">
+
+              <div class="mb-3 row">
+
+                                                   <center> <div class="col-lg-6" style="margin-top:50px;">
+                                                        <input   name="album_name" type="text" class="form-control"  placeholder="Your valid " required="">
+														<div class="invalid-feedback">
+Album name
+														</div>
+                                                    </div></center>
+                                                </div>
+              <div class="col-lg-8 ms-auto" style="margin-bottom:10px;margin-left:40px">
+                                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                                    </div>
+        </div>
+                </div>
+            </form>
+    </div>
+</div>
+{% endblock %}
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Create Album</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--    <h1>Create Album</h1>-->
+<!--    <form method="post" action="{{ url_for('create_album') }}">-->
+<!--        <label for="album_name">Album Name:</label>-->
+<!--        <input type="text" id="album_name" name="album_name" required>-->
+<!--        <button type="submit">Create Album</button>-->
+<!--    </form>-->
+<!--</body>-->
+<!--</html>-->

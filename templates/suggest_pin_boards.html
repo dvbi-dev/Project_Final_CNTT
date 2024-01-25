@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suggested Pin Boards</title>
+</head>
+<body>
+    <h1>Suggested Pin Boards</h1>
+
+    {% if suggested_pin_boards %}
+        <ul>
+            {% for pin_board in suggested_pin_boards %}
+                <p><a href="{{ url_for('view_pin_board', pin_board_id=pin_board.id) }}">{{ pin_board.name }}</a></p>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No suggested Pin Boards at the moment.</p>
+    {% endif %}
+</body>
+</html>
